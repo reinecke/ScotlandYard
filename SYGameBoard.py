@@ -3,7 +3,7 @@
 #  
 #
 #  Created by Eric Reinecke on 7/9/09.
-#  Copyright (c) 2009 SAN Productions. All rights reserved.
+#  Copyright (c) 2009 Eric Reinecke. All rights reserved.
 #
 from SYPlayer import *
 import defaultBoard
