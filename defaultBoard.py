@@ -1,4 +1,19 @@
 from SYPlayer import *
+'''
+Note: this board data was hand-entered from the Milton Bradley edition,
+according to the internets, there is a re-mapping of some space numbers 
+on the Ravensburger edition. None of the re-mapped spaces are start spaces.
+
+The (unverified) re-mapping is:
+    MB#200 is R#171
+    MB#171 is R#159
+    MB#159 is R#128
+    MB#128 is R#118
+    MB#118 is R#108
+
+    There is no MB#108
+    There is no R#200
+'''
 def board():
     gameBoard = {}
     gameBoard[0] = {}
