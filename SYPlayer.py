@@ -6,6 +6,7 @@
 #  Copyright (c) 2009 Eric Reinecke. All rights reserved.
 #
 
+# TODO: Move thes constants to their own file, used by more than just player
 # Ticket declarations
 SYTAXI = 'Taxi'
 SYBUS = 'Bus'
@@ -29,6 +30,7 @@ SYNOTCONNECTED = 'NotConnected'
 class SYPlayer(object):
     def __init__(self, name, team):
         # Set up starting tokens
+        # TODO: Move these constants elsewhere
         if team == SYDETECTIVE:
             self.tokens = {SYTAXI: 10,
                             SYBUS: 8,
@@ -40,6 +42,7 @@ class SYPlayer(object):
                             SYBLACK: 5,
                             SY2X: 2}
         
+        # TODO: Why not use None here?
         # Set up location, 0 is nowhere
         self.location = 0
         

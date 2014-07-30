@@ -5,8 +5,14 @@
 #  Created by Eric Reinecke on 7/9/09.
 #  Copyright (c) 2009 Eric Reinecke. All rights reserved.
 #
+# TODO: Scrap most this, use pattern.graph to express board
+#       (http://www.clips.ua.ac.be/pages/pattern-graph)
+# TODO: No * imports!
 from SYPlayer import *
+# TODO: the board should be loaded from something like yaml
 import defaultBoard
+
+# TODO: Y u no use sets!?!
 def extendUniq(list1, list2):
     '''Combines list1 with list 2 ommiting repeat items'''
     newList = list1[:]
@@ -17,6 +23,8 @@ def extendUniq(list1, list2):
     return newList
 
 class SYGameBoard(object):
+    # TODO: list as a default value? NO!
+    # TODO: No magic hard-coded stuff! Use a constant!
     def __init__(self, 
             detectiveNames=['Red', 'Purple', 'Blue', 'Green', 'Yellow'],
             mrXName = 'Mr. X'):
@@ -26,6 +34,8 @@ class SYGameBoard(object):
         self.gameBoard = defaultBoard.board()
                         
         # Build the starting location card stack
+        # TODO: This data should be provided by the game board,
+        #       there are specific locations to use
         self.startLocations = range(1,11)
         
         # Build the players
@@ -35,6 +45,7 @@ class SYGameBoard(object):
 
     def checkBoardIntegrity(self):
         '''Checks game board data integrity, reports errors'''
+        # TODO: This shouldn't print, it sould return a list of issues
         for node in self.gameBoard:
             nodeData = self.gameBoard[node]
             for dest in nodeData:
@@ -63,10 +74,12 @@ class SYGameBoard(object):
     def playerAt(self, loc):
         '''Returns the SYPlayer object at a given location
         Returns None if no players are there'''
+        # TODO: this should really handle multiple players at a spot
         # Check each player to see if they are at the location
         returnPlayer = None
         for player in self.players:
             if player.location == loc:
+                # TODO: shouldn't this just return?
                 returnPlayer = player
         
         return returnPlayer
@@ -99,6 +112,7 @@ class SYGameBoard(object):
         moveCheck = self.checkMove(playerLoc, dest, token)
         if moveCheck == SYLEGALMOVE and player.tokens[token] > 0:
             # Valid move, do it
+            # TODO: Should the board really be doing the token accounting?
             player.tokens[token] = player.tokens[token] - 1
             player.location = dest
             player.moves.append((dest, token, moveModifiers))
@@ -110,9 +124,9 @@ class SYGameBoard(object):
         and tickets that could be used'''
         # If player is specified, get it's parameters
         if player:
-            if not loc:
+            if loc is None:
                 loc = player.location
-            if not tokens:
+            if tokens is None:
                 tokens = player.tokens
         
         # Get all the possible moves for the location
@@ -121,7 +135,8 @@ class SYGameBoard(object):
         except KeyError:
             print "no location:", loc
             allMoves = []
-        
+       
+        # TODO: Move this stuff left, why so much indent!?!
         legalMoves = {}
         # Check legality given the player's tokens
         for loc in allMoves:
@@ -159,6 +174,7 @@ class SYGameBoard(object):
             
         # Handle different forms of tokens input
         remainingTokens = None
+        # TODO: NO EXPLICIT TYPE CHECKING!!
         if type(tokens) == list:
             numMoves = len(tokens)
             tokens = tokens[0]
@@ -169,6 +185,7 @@ class SYGameBoard(object):
         
         possibleLocs = possMoves.keys()
         print 'poss locs:', possibleLocs
+        # TODO: MOVE LEFT!!!!!!
         # Calculate out further possible moves if we need to
         if numMoves > 1:
             possibleLocs = []
@@ -185,7 +202,8 @@ class SYGameBoard(object):
                     newPossibleLocs = self.possibleLocation(numMoves-1, player, dest, remainingTokens)
                     possibleLocs = extendUniq(possibleLocs, newPossibleLocs)
         return possibleLocs
-    
+
+# TODO: Even if tests, dump this stuff into a function, please!
 board = SYGameBoard()
 board.checkBoardIntegrity()
 mrX=board.players[0]
